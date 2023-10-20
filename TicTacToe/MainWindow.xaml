@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize"
-        Title="TicTacToe" Height="800" Width="600">
+        Title="TicTacToe" Height="900" Width="600">
 
     <Window.Resources>
         <Style TargetType="TextBox">
@@ -40,12 +40,33 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="WhiteSmoke" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="2">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.7" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
-    <Border BorderBrush="DarkCyan" BorderThickness="1" Width="Auto" Height="Auto">
+        
+
+        <Border BorderBrush="DarkCyan" BorderThickness="1" Width="Auto" Height="Auto">
 
         <Grid x:Name="TicTacToe" VerticalAlignment="Bottom">
             <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="2*" />
@@ -62,22 +83,26 @@
 
             <TextBox Name="ResultTextBox" Background="Gray"  BorderBrush="Black" BorderThickness="3" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Width="600" IsReadOnly="True" TextAlignment="Center" FontSize="50" HorizontalAlignment="Left" MinHeight="82" />
 
-            <TextBox BorderBrush="Black" Background="Cyan" BorderThickness="2" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Width="300" Text="Player_1: X" IsReadOnly="True" TextAlignment="Left" FontSize="50" HorizontalAlignment="Left" MinHeight="82" Margin="0,0,0,0"/>
-            <TextBox BorderBrush="Black" Background="LightCoral" BorderThickness="2" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="300" Text="Player_2: O" IsReadOnly="True" TextAlignment="Left" FontSize="50" HorizontalAlignment="Left" MinHeight="82" Margin="100,0,0,0"/>
+            <TextBox BorderBrush="Black" Name="Player1NameTextBox" Background="Cyan" BorderThickness="2" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Width="300" Text="" IsReadOnly="True" TextAlignment="Left" FontSize="50" HorizontalAlignment="Left" MinHeight="82" Margin="0,0,0,0"/>
+            <TextBox BorderBrush="Black" Name="Player2NameTextBox" Background="LightCoral" BorderThickness="2" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="300" Text="" IsReadOnly="True" TextAlignment="Left" FontSize="50" HorizontalAlignment="Left" MinHeight="82" Margin="100,0,0,0"/>
 
-            <Button x:Name="Button11" Click="Button_Click" Background="WhiteSmoke" BorderBrush="Black" BorderThickness="2" Grid.Column="0" Grid.Row="2" Width="200" Height="200" FontSize="150"/>
-            <Button x:Name="Button12" Click="Button_Click" Background="WhiteSmoke" BorderBrush="Black" BorderThickness="2" Grid.Column="1" Grid.Row="2" Width="200" Height="200" FontSize="150"/>
-            <Button x:Name="Button13" Click="Button_Click" Background="WhiteSmoke" BorderBrush="Black" BorderThickness="2" Grid.Column="2" Grid.Row="2" Width="200" Height="200" FontSize="150"/>
-                                                                                                                                      
-            <Button x:Name="Button21" Click="Button_Click" Background="WhiteSmoke" BorderBrush="Black" BorderThickness="2" Grid.Column="0" Grid.Row="3" Width="200" Height="200" FontSize="150"/>
-            <Button x:Name="Button22" Click="Button_Click" Background="WhiteSmoke" BorderBrush="Black" BorderThickness="2" Grid.Column="1" Grid.Row="3" Width="200" Height="200" FontSize="150"/>
-            <Button x:Name="Button23" Click="Button_Click" Background="WhiteSmoke" BorderBrush="Black" BorderThickness="2" Grid.Column="2" Grid.Row="3" Width="200" Height="200" FontSize="150"/>
-                                                                                                                                       
-            <Button x:Name="Button31" Click="Button_Click" Background="WhiteSmoke" BorderBrush="Black" BorderThickness="2" Grid.Column="0" Grid.Row="4" Width="200" Height="200" FontSize="150"/>
-            <Button x:Name="Button32" Click="Button_Click" Background="WhiteSmoke" BorderBrush="Black" BorderThickness="2" Grid.Column="1" Grid.Row="4" Width="200" Height="200" FontSize="150"/>
-            <Button x:Name="Button33" Click="Button_Click" Background="WhiteSmoke" BorderBrush="Black" BorderThickness="2" Grid.Column="2" Grid.Row="4" Width="200" Height="200" FontSize="150"/>
 
-            <Button x:Name="NewGame" VerticalContentAlignment="Center" Content="New Game?" Click="GameEnd" Visibility="Hidden" Background="MediumSlateBlue" BorderBrush="Black" BorderThickness="2" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"  MinWidth="600" MinHeight="82" FontSize="50" HorizontalAlignment="Left" Margin="0,0,0,0"/>
+            <TextBox BorderBrush="Black" Background="Cyan" BorderThickness="2" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Width="300" Text="Player_1: X" IsReadOnly="True" TextAlignment="Left" FontSize="50" HorizontalAlignment="Left" MinHeight="82" Margin="0,0,0,0"/>
+            <TextBox BorderBrush="Black" Background="LightCoral" BorderThickness="2" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Width="300" Text="Player_2: O" IsReadOnly="True" TextAlignment="Left" FontSize="50" HorizontalAlignment="Left" MinHeight="82" Margin="100,0,0,0"/>
+
+            <Button x:Name="Button11" Click="Button_Click" Style="{StaticResource CustomButtonStyle}" HorizontalContentAlignment="Center" Grid.Column="0" Grid.Row="3" Width="200" Height="200" FontSize="150"/>
+            <Button x:Name="Button12" Click="Button_Click" Style="{StaticResource CustomButtonStyle}" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="3" Width="200" Height="200" FontSize="150"/>
+            <Button x:Name="Button13" Click="Button_Click" Style="{StaticResource CustomButtonStyle}" HorizontalContentAlignment="Center" Grid.Column="2" Grid.Row="3" Width="200" Height="200" FontSize="150"/>
+                                                                                                      
+            <Button x:Name="Button21" Click="Button_Click" Style="{StaticResource CustomButtonStyle}" HorizontalContentAlignment="Center" Grid.Column="0" Grid.Row="4" Width="200" Height="200" FontSize="150"/>
+            <Button x:Name="Button22" Click="Button_Click" Style="{StaticResource CustomButtonStyle}" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="4" Width="200" Height="200" FontSize="150"/>
+            <Button x:Name="Button23" Click="Button_Click" Style="{StaticResource CustomButtonStyle}" HorizontalContentAlignment="Center" Grid.Column="2" Grid.Row="4" Width="200" Height="200" FontSize="150"/>
+                                                                                                     
+            <Button x:Name="Button31" Click="Button_Click" Style="{StaticResource CustomButtonStyle}" HorizontalContentAlignment="Center" Grid.Column="0" Grid.Row="5" Width="200" Height="200" FontSize="150"/>
+            <Button x:Name="Button32" Click="Button_Click" Style="{StaticResource CustomButtonStyle}" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="5" Width="200" Height="200" FontSize="150"/>
+            <Button x:Name="Button33" Click="Button_Click" Style="{StaticResource CustomButtonStyle}" HorizontalContentAlignment="Center" Grid.Column="2" Grid.Row="5" Width="200" Height="200" FontSize="150"/>
+
+            <Button x:Name="NewGame" VerticalContentAlignment="Center" Content="New Game?" Click="GameEnd" Visibility="Hidden" Background="MediumSlateBlue" BorderBrush="Black" BorderThickness="2" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"  MinWidth="600" MinHeight="82" FontSize="50" HorizontalAlignment="Left" Margin="0,0,0,0"/>
 
         </Grid>
     </Border>

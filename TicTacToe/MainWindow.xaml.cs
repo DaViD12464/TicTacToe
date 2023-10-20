@@ -8,17 +8,54 @@ namespace TicTacToe
 
     public partial class MainWindow : Window
     {
-        public bool isplayer1turn { get; set; }
-        public bool isplayer2turn { get; set; }
-        public int counter {  get; set; }
+        private string winner = string.Empty;
+        private string player1name = string.Empty;
+        private string player2name = string.Empty;
+        private int player1score = 1;
+        private int player2score = 1;
+        private bool isplayer1turn { get; set; }
+        private bool isplayer2turn { get; set; }
+        private int counter {  get; set; }
         public MainWindow()
-        {   
+        {
             InitializeComponent();
             StartGame();
             ButtonReset();
+            OpenNames_Click(null!,null!);
         }
 
-        private void StartGame()
+        private void OpenNames_Click(object sender, RoutedEventArgs e)
+        {
+            Names secondWindow = new Names();
+            secondWindow.ShowDialog();
+
+            player1name = secondWindow.Player1Name.Text;
+            player2name = secondWindow.Player2Name.Text;
+
+            Player1NameTextBox.Text = player1name;
+            Player2NameTextBox.Text = player2name;
+        }
+
+        private void PlayerScore(string player)
+        {
+            if (player == "player1")
+            {
+                winner = "player1";
+                ResultTextBox.Text = $"{player1name} Won!!!";
+                ResultTextBox.Background = new SolidColorBrush(Colors.DodgerBlue);
+                Player1NameTextBox.Text = player1name + "  :::  " + player1score;
+            }
+            else if (player == "player2") 
+            {
+                winner = "player2";
+                ResultTextBox.Text = $"{player2name} Won!!!";
+                ResultTextBox.Background = new SolidColorBrush(Colors.OrangeRed);
+                Player2NameTextBox.Text = player2name + "  :::  " + player2score;
+            }
+
+        }
+
+            private void StartGame()
         {
             counter = 0;
             RandomPlayer();
@@ -29,7 +66,7 @@ namespace TicTacToe
             Random random = new Random();
             int randomNumber = random.Next(1, 3);
             if (randomNumber == 1)
-            {
+            {   
                 ResultTextBox.Text = "Player 1 Turn!";
                 ResultTextBox.Background = new SolidColorBrush(Colors.Cyan);
                 isplayer2turn = false;
@@ -46,17 +83,18 @@ namespace TicTacToe
 
         private void GameEnd(object sender, RoutedEventArgs e )
         {
-           string winner = ResultTextBox.Text;
-            if (winner == "Player 1 Won!!!")
+            if (winner == "player1")
             {
+                player1score++;
                 ResultTextBox.Text = "Player 2 Turn!";
                 ResultTextBox.Background = new SolidColorBrush(Colors.LightCoral);
                 isplayer2turn = true;
                 isplayer1turn = false;
             }
             else
-                if (winner == "Player 2 Won!!!")
+                if (winner == "player2")
             {
+                player2score++;
                 ResultTextBox.Text = "Player 1 Turn!";
                 ResultTextBox.Background = new SolidColorBrush(Colors.Cyan);
                 isplayer2turn = false;
@@ -123,14 +161,12 @@ namespace TicTacToe
                 Button13.Background = Brushes.LightGreen;
                 if (Button11.Content.ToString() == "X")
                 {
-                    ResultTextBox.Text = "Player 1 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.DodgerBlue);
+                    PlayerScore("player1");
                 }
                 else
                 if (Button11.Content.ToString() == "O")
                 {
-                    ResultTextBox.Text = "Player 2 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.OrangeRed);
+                    PlayerScore("player2");
                 }
                 return true;
             }
@@ -141,14 +177,12 @@ namespace TicTacToe
                 Button23.Background = Brushes.LightGreen;
                 if (Button21.Content.ToString() == "X")
                 {
-                    ResultTextBox.Text = "Player 1 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.DodgerBlue);
+                    PlayerScore("player1");
                 }
                 else
                 if (Button21.Content.ToString() == "O")
                 {
-                    ResultTextBox.Text = "Player 2 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.OrangeRed);
+                    PlayerScore("player2");
                 }
                 return true;
             }
@@ -160,14 +194,12 @@ namespace TicTacToe
                 Button33.Background = Brushes.LightGreen;
                 if (Button31.Content.ToString() == "X")
                 {
-                    ResultTextBox.Text = "Player 1 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.DodgerBlue);
+                    PlayerScore("player1");
                 }
                 else
                 if (Button31.Content.ToString() == "O")
                 {
-                    ResultTextBox.Text = "Player 2 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.OrangeRed);
+                    PlayerScore("player2");
                 }
                 return true;
             }
@@ -179,14 +211,12 @@ namespace TicTacToe
                 Button31.Background = Brushes.LightGreen;
                 if (Button11.Content.ToString() == "X")
                 {
-                    ResultTextBox.Text = "Player 1 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.DodgerBlue);
+                    PlayerScore("player1");
                 }
                 else
                 if (Button11.Content.ToString() == "O")
                 {
-                    ResultTextBox.Text = "Player 2 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.OrangeRed);
+                    PlayerScore("player2");
                 }
                 return true;
             }
@@ -197,14 +227,12 @@ namespace TicTacToe
                 Button32.Background = Brushes.LightGreen;
                 if(Button12.Content.ToString() == "X")
                 {
-                    ResultTextBox.Text = "Player 1 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.DodgerBlue);
+                    PlayerScore("player1");
                 }
                 else
                 if (Button12.Content.ToString() == "O")
                 {
-                    ResultTextBox.Text = "Player 2 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.OrangeRed);
+                    PlayerScore("player2");
                 }
                 return true;
             }
@@ -215,14 +243,12 @@ namespace TicTacToe
                 Button33.Background = Brushes.LightGreen;
                 if (Button13.Content.ToString() == "X")
                 {
-                    ResultTextBox.Text = "Player 1 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.DodgerBlue);
+                    PlayerScore("player1");
                 }
                 else
                 if (Button13.Content.ToString() == "O")
                 {
-                    ResultTextBox.Text = "Player 2 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.OrangeRed);
+                    PlayerScore("player2");
                 }
                 return true;
             }
@@ -234,14 +260,12 @@ namespace TicTacToe
                 Button33.Background = Brushes.LightGreen;
                 if (Button11.Content.ToString() == "X")
                 {
-                    ResultTextBox.Text = "Player 1 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.DodgerBlue);
+                    PlayerScore("player1");
                 }
                 else
                 if (Button11.Content.ToString() == "O")
                 {
-                    ResultTextBox.Text = "Player 2 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.OrangeRed);
+                    PlayerScore("player2");
                 }
                 return true;
             }
@@ -252,14 +276,12 @@ namespace TicTacToe
                 Button31.Background = Brushes.LightGreen;
                 if (Button13.Content.ToString() == "X")
                 {
-                    ResultTextBox.Text = "Player 1 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.DodgerBlue);
+                    PlayerScore("player1");
                 }
                 else
                 if (Button13.Content.ToString() == "O")
                 {
-                    ResultTextBox.Text = "Player 2 Won!!!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.OrangeRed);
+                    PlayerScore("player2");
                 }
                 return true;
             }
@@ -307,6 +329,20 @@ namespace TicTacToe
             return true;
         }
 
+        private void ButtonLock()
+        {
+            Button11.IsEnabled = false;
+            Button12.IsEnabled = false;
+            Button13.IsEnabled = false;
+
+            Button21.IsEnabled = false;
+            Button22.IsEnabled = false;
+            Button23.IsEnabled = false;
+
+            Button31.IsEnabled = false;
+            Button32.IsEnabled = false;
+            Button33.IsEnabled = false;
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -341,48 +377,9 @@ namespace TicTacToe
             if (counter >=5)
             {
                 if (CheckIfPLayerWon() == true)
-                { NewGame.Visibility = Visibility.Visible;
-                    
-                    if (ButtonWithoutContent("Button11") == true)
-                    {
-                        Button11.IsEnabled = false;
-                    }
-                    if (ButtonWithoutContent("Button12") == true)
-                    {
-                        Button12.IsEnabled = false;
-                    }
-                    if (ButtonWithoutContent("Button13") == true)
-                    {
-                        Button13.IsEnabled = false;
-                    }
-
-                    if (ButtonWithoutContent("Button21") == true)
-                    {
-                        Button21.IsEnabled = false;
-                    }
-                    if (ButtonWithoutContent("Button22") == true)
-                    {
-                        Button22.IsEnabled = false;
-                    }
-                    if (ButtonWithoutContent("Button23") == true)
-                    {
-                        Button23.IsEnabled = false;
-                    }
-
-                    if (ButtonWithoutContent("Button31") == true)
-                    {
-                        Button31.IsEnabled = false;
-                    }
-                    if (ButtonWithoutContent("Button32") == true)
-                    {
-                        Button32.IsEnabled = false;
-                    }
-                    if (ButtonWithoutContent("Button33") == true)
-                    {
-                        Button33.IsEnabled = false;
-                    }
-                    
-
+                {
+                    NewGame.Visibility = Visibility.Visible;
+                    ButtonLock();
                 }
             }
             if (counter == 9) 
