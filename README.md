@@ -20,12 +20,10 @@ After one of the players reaches 3 fields picked of all game checks if he won, i
 and allow to play next game (player who lost game will begin this time).
 If game ends with draw, 'NewGame' button will randomly pick player to begin next round.
 Game also shows points (your score/number or won rounds) next to your name!
---------------------
 
 
 
 
 
 
-
-Programmed by: Dawid Czernik.
+Programmed by DC.
