@@ -42,14 +42,14 @@ namespace TicTacToe
             {
                 winner = "player1";
                 ResultTextBox.Text = $"{player1name} Won!!!";
-                ResultTextBox.Background = new SolidColorBrush(Colors.DodgerBlue);
+                ResultTextBox.Background = new SolidColorBrush(Colors.LightSkyBlue);
                 Player1NameTextBox.Text = player1name + "  :::  " + player1score;
             }
             else if (player == "player2") 
             {
                 winner = "player2";
                 ResultTextBox.Text = $"{player2name} Won!!!";
-                ResultTextBox.Background = new SolidColorBrush(Colors.OrangeRed);
+                ResultTextBox.Background = new SolidColorBrush(Colors.LightCoral);
                 Player2NameTextBox.Text = player2name + "  :::  " + player2score;
             }
 
@@ -68,7 +68,7 @@ namespace TicTacToe
             if (randomNumber == 1)
             {   
                 ResultTextBox.Text = "Player 1 Turn!";
-                ResultTextBox.Background = new SolidColorBrush(Colors.Cyan);
+                ResultTextBox.Background = new SolidColorBrush(Colors.LightSkyBlue);
                 isplayer2turn = false;
                 isplayer1turn = true;
             }
@@ -96,7 +96,7 @@ namespace TicTacToe
             {
                 player2score++;
                 ResultTextBox.Text = "Player 1 Turn!";
-                ResultTextBox.Background = new SolidColorBrush(Colors.Cyan);
+                ResultTextBox.Background = new SolidColorBrush(Colors.LightSkyBlue);
                 isplayer2turn = false;
                 isplayer1turn = true;
             }
@@ -369,7 +369,7 @@ namespace TicTacToe
                     isplayer2turn = false;
 
                     ResultTextBox.Text = "Player 1 Turn!";
-                    ResultTextBox.Background = new SolidColorBrush(Colors.Cyan);
+                    ResultTextBox.Background = new SolidColorBrush(Colors.LightSkyBlue);
                     counter++;
                 }
             }
