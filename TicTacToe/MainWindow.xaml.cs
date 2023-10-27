@@ -385,12 +385,15 @@ namespace TicTacToe
             if (counter == 9) 
             {
                 if (CheckIfPLayerWon() == true)
-                { NewGame.Visibility = Visibility.Visible; }
+                {  NewGame.Visibility = Visibility.Visible;
+                    ButtonLock();
+                }
                 else
                 {
                     ResultTextBox.Text = "DRAW";
                     ResultTextBox.Background = new SolidColorBrush(Colors.LightGray);
                     NewGame.Visibility = Visibility.Visible;
+                    ButtonLock();
                 }
                 
             }
